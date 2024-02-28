@@ -83,8 +83,29 @@ Node* llfilter(Node* head, Comp pred)
     //*********************************************
     // Provide your implementation below
     //*********************************************
+    // base case
+    if(head == NULL) {
+        return NULL;
+    }
+    // if pred of head->val is true, then remove current node from list
+    if(pred(head->val) == true) {
+        Node* temp = head->next;
+        delete head;
+        return llfilter(temp, pred);
+    }
 
+    else {
+        // if does not satisfy pred requrement, then keep in array
+        // recursively filter the remaining of the array
+        head->next =  llfilter(head->next, pred);
+        return head;
+    }
 
 }
-
+/*
+As an example, if the list pointed to by head contained: 3 6 4 9 and the 
+Comp object’s operator() returns true for an ODD integer input, then the 
+function should return a pointer to the list containing 6 4 (since all the
+ odd integers would have been filtered out).
+*/
 #endif
